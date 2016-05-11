@@ -13,19 +13,41 @@
       <i class="fa fa-globe" aria-hidden="true"></i>
       <%= @restaurant.category %>
     </p>
+    <!-- Display the floored average rating based on existing reviews -->
+    <% if @restaurant.reviews.count == 0 %>
+      <% mean = 0 %>
+    <% else %>
+      <% sum = 0 %>
+      <% @restaurant.reviews.each do |review| %>
+        <% sum += review.rating %>
+      <% end %>
+      <% mean = sum / @restaurant.reviews.count %>
+    <% end %>
+    <p>
+      Average rating:
+      <% empty_stars_mean = 5 - mean %>
+      <% mean.times do %>
+        <i class="fa fa-heart" aria-hidden="true" style="color: #FF0000"></i>
+      <% end %>
+      <% empty_stars_mean.times do %>
+        <i class="fa fa-heart" aria-hidden="true" style="color: #E6E6E6"></i>
+      <% end %>
+    </p>
+    <!-- End of display average rating -->
     <a href="#reviews_list" class="btn btn-primary btn-lg">Read reviews</a>
   </div>
 </div>
 
 <div class="container padded" id="reviews_list">
-  <%= link_to new_restaurant_review_path(@restaurant) do %>
+  <a href="#add_review">
     <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Add a review
-  <% end %>
+  </a>
 
   <h3>Read all <strong><%= @restaurant.reviews.count %></strong> review(s)</h3>
   <ul class="list-unstyled">
     <% @restaurant.reviews.each do |review| %>
     <li>
+      <%= image_tag 'http://lorempixel.com/300/300/people/', {class: "avatar-large"} %>
       <% empty_stars = 5 - review.rating %>
       <% review.rating.times do %>
         <i class="fa fa-heart" aria-hidden="true" style="color: #FF0000"></i>
@@ -42,6 +64,19 @@
     <% end %>
   </ul>
 </div>
+
+<div class="review-background">
+  <div class="container padded" id="add_review">
+    <h4>Add a review (for <%= @restaurant.name %>)</h4>
+    <%= simple_form_for([@restaurant, @review], html: { class: 'form-horizontal' }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :content %>
+      <%= f.input :rating, collection: [0, 1, 2, 3, 4, 5], prompt: "Choose the rating" %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>
+
 
 
 
