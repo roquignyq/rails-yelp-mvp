@@ -21,7 +21,8 @@
   <%= link_to new_restaurant_review_path(@restaurant) do %>
     <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Add a review
   <% end %>
-  <h3>Read all reviews</h3>
+
+  <h3>Read all <strong><%= @restaurant.reviews.count %></strong> review(s)</h3>
   <ul class="list-unstyled">
     <% @restaurant.reviews.each do |review| %>
     <li>
@@ -30,7 +31,7 @@
         <i class="fa fa-heart" aria-hidden="true" style="color: #FF0000"></i>
       <% end %>
       <% empty_stars.times do %>
-        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true" style="color: #E6E6E6"></i>
       <% end %>
       - <%= review.content %>
       <p style="color: #CCCCCC; font-size: 0.8em; display: inline;">
