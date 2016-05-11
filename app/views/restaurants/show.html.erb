@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Restaurant: <%= @restaurant.name %></h1>
+  <p><%= @restaurant.address %></p>
+  <p><%= @restaurant.phone_number %></p>
+  <p><%= @restaurant.category %></p>
+  <hr>
+  <%= link_to new_restaurant_review_path(@restaurant) do %>
+    <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Add a review
+  <% end %>
+  <h3>Read all reviews</h3>
+  <ul>
+    <% @restaurant.reviews.each do |review| %>
+    <li>
+      Rating: <%= review.rating %> - <%= review.content %>
+    </li>
+    <% end %>
+  </ul>
+</div>

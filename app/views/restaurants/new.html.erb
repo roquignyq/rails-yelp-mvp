@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Create a restaurant</h1>
+
+  <%= simple_form_for(@restaurant, html: { class: 'form-horizontal' }) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name %>
+    <%= f.input :address %>
+    <%= f.input :phone_number %>
+    <%= f.input :category, collection: ["chinese", "italian", "japanese", "french", "belgian"], prompt: "Choose the category", selected: "chinese" %>
+    <%= f.button :submit %>
+  <% end %>
+
+</div>
+
+

@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Create a review for <%= @restaurant.name %></h1>
+
+  <%= simple_form_for([@restaurant, @review], html: { class: 'form-horizontal' }) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :content %>
+    <%= f.input :rating, collection: [0, 1, 2, 3, 4, 5], prompt: "Choose the rating", selected: 3 %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
+
