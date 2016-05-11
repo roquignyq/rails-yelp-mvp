@@ -1,18 +1,46 @@
-<div class="container">
-  <h1>Restaurant: <%= @restaurant.name %></h1>
-  <p><%= @restaurant.address %></p>
-  <p><%= @restaurant.phone_number %></p>
-  <p><%= @restaurant.category %></p>
-  <hr>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('http://lorempixel.com/900/900/food/');">
+  <div class="banner-content">
+    <h1><%= @restaurant.name %></h1>
+    <p>
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      <%= @restaurant.address %>
+    </p>
+    <p>
+      <i class="fa fa-phone" aria-hidden="true"></i>
+      <%= @restaurant.phone_number %>
+    </p>
+    <p>
+      <i class="fa fa-globe" aria-hidden="true"></i>
+      <%= @restaurant.category %>
+    </p>
+    <a href="#reviews_list" class="btn btn-primary btn-lg">Read reviews</a>
+  </div>
+</div>
+
+<div class="container padded" id="reviews_list">
   <%= link_to new_restaurant_review_path(@restaurant) do %>
     <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Add a review
   <% end %>
   <h3>Read all reviews</h3>
-  <ul>
+  <ul class="list-unstyled">
     <% @restaurant.reviews.each do |review| %>
     <li>
-      Rating: <%= review.rating %> - <%= review.content %>
+      <% empty_stars = 5 - review.rating %>
+      <% review.rating.times do %>
+        <i class="fa fa-heart" aria-hidden="true" style="color: #FF0000"></i>
+      <% end %>
+      <% empty_stars.times do %>
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+      <% end %>
+      - <%= review.content %>
+      <p style="color: #CCCCCC; font-size: 0.8em; display: inline;">
+        - posted on <%= review.created_at.strftime('%B %e at %l:%M %p') %>
+      </p>
+      <hr>
     </li>
     <% end %>
   </ul>
 </div>
+
+
+

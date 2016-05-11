@@ -1,15 +1,26 @@
 <div class="container">
   <h1>Restaurants</h1>
-  <ul class="list-unstyled">
-    <% @restaurants.each do |restaurant| %>
-    <li>
-      <h2><%= link_to restaurant.name, restaurant_path(restaurant) %></h2>
-      <p><%= restaurant.address %></p>
-      <p><%= restaurant.phone_number %></p>
-      <p><%= restaurant.category %></p>
-      </li>
-    <% end %>
-  </ul>
+
+  <% @restaurants.each do |restaurant| %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-3">
+      <%= link_to restaurant.name, restaurant_path(restaurant) %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      <%= restaurant.address %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <i class="fa fa-phone" aria-hidden="true"></i>
+      <%= restaurant.phone_number %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <i class="fa fa-globe" aria-hidden="true"></i>
+      <%= restaurant.category %>
+    </div>
+  </div>
+  <hr>
+  <% end %>
 </div>
 
 
